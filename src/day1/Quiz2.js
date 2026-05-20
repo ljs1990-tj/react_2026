@@ -1,35 +1,61 @@
 import { useState } from "react"
 
+// 1. 최초 화면은 버튼 외 아무것도 없는 화면
+// 2. '유저목록' 버튼 클릭 시 
+//   UserList라는 컴포넌트 호출 -> 유저 이름을 ul태그 형태로 출력
+// 3. '과목목록' 버튼 클릭 시
+//   SubjectList 컴포넌트 호출 -> 과목 목록을 테이블 형태로 출력
+// 4. 2,3번은 중복해서 출력 x
+// 5. '초기화' 버튼 클릭 시 모든 컴포넌트 화면에서 지우기
+//   -> 1번화면으로 
+
+// == 컴포넌트 작성시에 함수 보내줘서 실행 == 
+// 1. 책이름을 클릭하면 가격 alert창으로 출력
+
+// 2. 이름을 클릭하면 
+//  'ooo님의 나이는 oo입니다' alert 출력
+
 function UserList(props){
     return <>
         <ul>
             {props.list.map(item => {
-                return <li key={item.userId}>{item.userName}</li>
+                return <li key={item.userId}>
+                    <a href="/" onClick={e => {
+                        e.preventDefault();
+                        props.onPrint(item.userName, item.age);
+                    }}>{item.userName}</a>
+                </li>
             })}
         </ul>
     </>
 }
-
 function SubjectList(props){
     return <>
         <table>
             <tr>
                 <th>번호</th>
                 <th>과목명</th>
-                <th>책</th>
+                <th>책이름</th>
                 <th>가격</th>
             </tr>
             {props.list.map(item => {
-                return <tr key={item.subId}>
+                return <tr>
                     <td>{item.subId}</td>
                     <td>{item.subName}</td>
-                    <td>{item.bookName}</td>
+                    <td>
+                        <a href="/" onClick={e => {
+                            e.preventDefault();
+                            props.onPrint(item.price);
+                        }}>{item.bookName}</a>
+                    </td>
                     <td>{item.price}</td>
                 </tr>
             })}
+            
         </table>
     </>
 }
+
 
 function App(){
     let [menu, setMenu] = useState("clear");
@@ -47,7 +73,7 @@ function App(){
     return <>
         <div>
             <button onClick={()=>{
-                setMenu("user");
+                setMenu("user")
             }}>유저목록</button>
             <button onClick={()=>{
                 setMenu("subject")
@@ -57,7 +83,16 @@ function App(){
             }}>초기화</button>
         </div>
         <hr></hr>
-        {menu == "user" ? <UserList list={users}></UserList> : menu == "subject" ? <SubjectList list={subjects}></SubjectList> : null}
+        {menu == "user" ? 
+            <UserList list={users} onPrint={(name, age)=>{
+               alert(`${name}님의 나이는 ${age}입니다`);
+            }}></UserList> : menu == "subject" ? 
+            <SubjectList list={subjects} onPrint={(price)=>{
+                alert(price + "원");     
+            }} ></SubjectList> : null}
+        {/* {menu == "user" ? <UserList list={users}></UserList> : ""}
+        {menu == "subject" ? <SubjectList list={subjects}></SubjectList> : null} */}
+        
     </>
 }
 
