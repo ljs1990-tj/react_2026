@@ -5,6 +5,7 @@ import Test from './day3/App1';
 import Main from './Main';
 import StudentList from './component/student/List';
 import StudentAdd from './component/student/Add';
+import ProductList from './component/product/List';
 
 function AppRouter() {
   return (
@@ -13,6 +14,7 @@ function AppRouter() {
         <Route path="/" element={<Main />} />
         <Route path="/student/list" element={<StudentList />} />
         <Route path="/student/add" element={<StudentAdd />} />
+        <Route path="/product/list" element={<ProductList />} />
       </Routes>
     </BrowserRouter>
   );

@@ -7,6 +7,7 @@ function Main(){
         <hr></hr>
         <ul>
             <li><Link to="/student/list">학생목록</Link></li>
+            <li><Link to="/product/list">제품목록</Link></li>
         </ul>
     </>
 }
