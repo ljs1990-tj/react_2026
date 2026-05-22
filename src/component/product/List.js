@@ -32,6 +32,7 @@ function ProductList(){
                     <th>제품명</th>
                     <th>브랜드</th>
                     <th>가격</th>
+                    <th>수정</th>
                 </tr>
                 {list.map(item => {
                     return <tr>
@@ -42,6 +43,9 @@ function ProductList(){
                         }}>{item.PRODUCT_NAME}</a></td>
                         <td>{item.BRAND}</td>
                         <td>{item.PRICE}</td>
+                        <td><button onClick={()=>{
+                            navigate("/product/edit/"+item.PRODUCT_ID);
+                        }}>수정</button></td>
                     </tr>
                 })}
             </table>
