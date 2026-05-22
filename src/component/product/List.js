@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import '../../App.css';
+import { useNavigate } from "react-router-dom";
 
 function ProductList(){
     let [list, setList] = useState([]);
+    let navigate = useNavigate();
 
     function getList(){
         fetch("http://localhost:3010/product")
@@ -28,7 +31,10 @@ function ProductList(){
                 {list.map(item => {
                     return <tr>
                         <td>{item.PRODUCT_ID}</td>
-                        <td>{item.PRODUCT_NAME}</td>
+                        <td><a href="/" onClick={(e)=>{
+                            e.preventDefault();
+                            navigate("/product/view/"+item.PRODUCT_ID);
+                        }}>{item.PRODUCT_NAME}</a></td>
                         <td>{item.BRAND}</td>
                         <td>{item.PRICE}</td>
                     </tr>
