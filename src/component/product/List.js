@@ -21,6 +21,11 @@ function ProductList(){
         <h2>제품 목록!</h2>
         <hr></hr>
         <div>
+            <button onClick={()=>{
+                navigate("/product/add");
+            }}>제품등록</button>
+        </div>
+        <div>
             <table>
                 <tr>
                     <th>번호</th>
